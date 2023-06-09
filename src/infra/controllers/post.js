@@ -12,7 +12,6 @@ const PostsController = {
         const result = adapter.getAll({order: 'id DESC'});
 
         result.then((rows) => {
-            console.log(rows);
             db.end();
             response.send(rows);
         });
@@ -64,7 +63,6 @@ const PostsController = {
         const result = adapter.get(parseInt(request.params.id));
 
         result.then((row) => {
-            // console.log(row);
             db.end();
 
             if(row){
@@ -137,7 +135,6 @@ const PostsController = {
         deleted.then((list) => {
             const result = adapter.delete(parseInt(request.params.id));
             result.then((row) => {
-                console.log(row);
                 db.end();
     
                 if(row)

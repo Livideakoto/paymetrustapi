@@ -15,7 +15,6 @@ const register = (request, response) => {
 
     const result = adapter.add(user);
     result.then((row) => {
-        console.log(row);
         db.end();
         response.send(row);
     });
@@ -88,7 +87,6 @@ const users = (request, response) => {
     const result = adapter.getAll();
 
     result.then((rows) => {
-        console.log(rows);
         db.end();
         response.send(rows);
     });
@@ -100,7 +98,6 @@ const user = (request, response) => {
     const result = adapter.get(parseInt(request.params.id));
 
     result.then((row) => {
-        console.log(row);
         db.end();
         response.send(row);
     });

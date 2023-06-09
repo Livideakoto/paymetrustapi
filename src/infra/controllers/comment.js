@@ -11,7 +11,6 @@ const CommentsController = {
         });
 
         result.then((rows) => {
-            console.log(rows);
             db.end();
             response.send(rows);
         });
@@ -23,7 +22,6 @@ const CommentsController = {
 
         const result = adapter.add(comment);
         result.then((row) => {
-            console.log(row);
             db.end();
             response.send(row);
         });
@@ -34,7 +32,6 @@ const CommentsController = {
         const result = adapter.get(parseInt(request.params.comment));
 
         result.then((row) => {
-            console.log(row);
             db.end();
 
             if(row)
@@ -52,7 +49,6 @@ const CommentsController = {
         const result = adapter.delete(parseInt(request.params.comment));
 
         result.then((row) => {
-            console.log(row);
             db.end();
 
             if(row)

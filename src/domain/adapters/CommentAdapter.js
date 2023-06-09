@@ -8,7 +8,6 @@ class CommentAdapter extends BaseAdapter{
 
     async add(datas){
         let added = await super.add(datas);
-        // console.log(added);
         return this.get(added.id);
     }
 

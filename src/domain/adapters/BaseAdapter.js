@@ -34,8 +34,7 @@ class BaseAdapter {
 
     addMany(datasArray){
         let results = [];
-
-        // console.log(datasArray);
+        
         datasArray.map((data, index) => {
             let r = this.add(data);
             r.then((row) => {

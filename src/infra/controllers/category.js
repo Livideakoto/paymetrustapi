@@ -10,7 +10,6 @@ const CategoriesController = {
         const result = adapter.getAll();
 
         result.then((rows) => {
-            console.log(rows);
             db.end();
             response.send(rows);
         });
@@ -43,7 +42,6 @@ const CategoriesController = {
 
         const result = adapter.add(category);
         result.then((row) => {
-            console.log(row);
             db.end();
             response.send(row);
         });
@@ -54,7 +52,6 @@ const CategoriesController = {
         const result = adapter.get(parseInt(request.params.id));
 
         result.then((row) => {
-            console.log(row);
             db.end();
 
             if(row)
@@ -86,7 +83,6 @@ const CategoriesController = {
         const result = adapter.delete(parseInt(request.params.id));
         
         result.then((row) => {
-            console.log(row);
             db.end();
 
             if(row)
