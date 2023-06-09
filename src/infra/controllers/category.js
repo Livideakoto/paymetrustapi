@@ -1,5 +1,7 @@
 const { getDBClient } = require('../../domain/persistence/db');
 const CategoryAdapter = require('../../domain/adapters/CategoryAdapter');
+const PostAdapter = require('../../domain/adapters/PostAdapter');
+const CategoryPostAdapter = require('../../domain/adapters/CategoryPostAdapter');
 
 const CategoriesController = {
     all: (request, response) => {
@@ -12,6 +14,27 @@ const CategoriesController = {
             db.end();
             response.send(rows);
         });
+    },
+    posts: (request, response) => {
+        const db = getDBClient();
+        const CPAdapter = new CategoryPostAdapter(db);
+        const result = CPAdapter.getAll({
+            where: `category_id = ${parseInt(request.params.id)}`,
+            order: 'post_id DESC'
+        });
+
+        result.then((categoryPosts) => {
+            let promises = [];
+            let PAdapter = new PostAdapter(db);
+
+            categoryPosts.map((el, index) => {
+                promises.push(PAdapter.get(el.post_id));
+            });
+
+            Promise.all(promises).then((posts) => {
+                response.send(posts);
+            });
+        })
     },
     add: (request, response) => {
         const db = getDBClient();

@@ -1,5 +1,5 @@
 const slugify = require('slugify');
-const { encode } = require('html-entities');
+const { encode, decode } = require('html-entities');
 
 const { getDBClient } = require('../../domain/persistence/db');
 const PostAdapter = require('../../domain/adapters/PostAdapter');
@@ -9,7 +9,7 @@ const PostsController = {
     all: (request, response) => {
         const db = getDBClient();
         const adapter = new PostAdapter(db);
-        const result = adapter.getAll();
+        const result = adapter.getAll({order: 'id DESC'});
 
         result.then((rows) => {
             console.log(rows);
@@ -67,13 +67,15 @@ const PostsController = {
             // console.log(row);
             db.end();
 
-            if(row)
+            if(row){
+                row.content = decode(row.content);
                 response.send(row);
-            else
+            }else{
                 response.status(404).send({
                     code: 404,
                     message: "Not Found"
                 });
+            }
         });
     },
     update: (request, response) => {

@@ -51,7 +51,12 @@ const login = (request, response) => {
                 }).then((r) => {
                     res = {
                         code: 200,
-                        object: {token: r.token}
+                        object: {
+                            token: r.token,
+                            id: row.id, 
+                            email: row.email, 
+                            pseudo: row.pseudo
+                        }
                     }
 
                     response.send(res);

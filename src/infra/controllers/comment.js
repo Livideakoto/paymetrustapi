@@ -1,12 +1,14 @@
 const { getDBClient } = require('../../domain/persistence/db');
 const CommentAdapter = require("../../domain/adapters/CommentAdapter");
 
-
 const CommentsController = {
     all: (request, response) => {
         const db = getDBClient();
         const adapter = new CommentAdapter(db);
-        const result = adapter.getAll({where: `post_id = ${request.params.id}`});
+        const result = adapter.getAll({
+            where: `post_id = ${request.params.id}`, 
+            order: 'id DESC'
+        });
 
         result.then((rows) => {
             console.log(rows);

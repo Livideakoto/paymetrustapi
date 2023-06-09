@@ -15,6 +15,7 @@ apiRouter.post('/categories', CategoriesController.add);
 apiRouter.get('/categories/:id', CategoriesController.get);
 apiRouter.post('/categories/:id', CategoriesController.update);
 apiRouter.delete('/categories/:id', CategoriesController.delete);
+apiRouter.get('/categories/:id/posts', CategoriesController.posts);
 
 //Posts
 apiRouter.get('/posts', PostsController.all);
